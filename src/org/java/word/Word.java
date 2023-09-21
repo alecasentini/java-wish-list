@@ -1,5 +1,6 @@
 package org.java.word;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -27,6 +28,10 @@ public class Word {
             int conteggio = entry.getValue();
             System.out.println(carattere + ":" + conteggio);
         }
+        
+        System.out.println("\n-------------------\n");
+        
+        charCounter.forEach((carattere, conteggio) -> System.out.println(carattere + ":" + conteggio));
     }
 }
 
