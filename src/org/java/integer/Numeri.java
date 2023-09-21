@@ -1,53 +1,70 @@
+package org.java.integer;
 
-	package org.java.integer;
+import java.util.ArrayList;
+import java.util.List;
 
-	public class Numeri {
-	    private int[] elenco;
-	    private int indice;
+public class Numeri {
+    private List<Integer> elenco;
+    private int indice;
 
-	    public Numeri(int[] array) {
-	        this.elenco = array;
-	        this.indice = 0;
-	    }
+    public Numeri() {
+        this.elenco = new ArrayList<>();
+        this.indice = 0;
+    }
 
-	    public int getElementoSuccessivo() {
-	        if (hasAncoraElementi()) {
-	            return elenco[indice++];
-	        } else {
-	            throw new IllegalStateException("Non ci sono più elementi");
-	        }
-	    }
+    public Numeri(int[] array) {
+        this();
+        for (int num : array) {
+            elenco.add(num);
+        }
+    }
 
-	    public boolean hasAncoraElementi() {
-	        return indice < elenco.length;
-	    }
+    public void addElemento(int elemento) {
+        elenco.add(elemento);
+    }
 
-	    public static void main(String[] args) {
-	        int[] array = {2, 3, 5, 7, 11};
-	        Numeri ciclatore = new Numeri(array);
+    public int getElementoSuccessivo() {
+        if (hasAncoraElementi()) {
+            return elenco.get(indice++);
+        } else {
+            throw new IllegalStateException("Non ci sono più elementi");
+        }
+    }
 
-	        while (true) {
-	            if (ciclatore.hasAncoraElementi()) {
-	                int elemento = ciclatore.getElementoSuccessivo();
-	                System.out.println("Elemento successivo: " + elemento);
-	                if (ciclatore.hasAncoraElementi()) {
-	                    System.out.println("C'è un altro elemento");
-	                    System.out.println("Premi Invio per continuare...");
+    public boolean hasAncoraElementi() {
+        return indice < elenco.size();
+    }
 
-	                    try {
-	                        System.in.read();
-	                        System.in.skip(1); 
-	                    } catch (Exception e) {
-	                        e.printStackTrace();
-	                    }
-	                } else {
-	                    System.out.println("Non ci sono più elementi");
-	                }
-	            } else {
-	                break;
-	            }
-	        }
-	    }
-	}
+    public static void main(String[] args) {
+        Numeri ciclatore = new Numeri();
 
+        ciclatore.addElemento(2);
+        ciclatore.addElemento(3);
+        ciclatore.addElemento(5);
+        ciclatore.addElemento(7);
+        ciclatore.addElemento(11);
+        ciclatore.addElemento(13);
 
+        while (true) {
+            if (ciclatore.hasAncoraElementi()) {
+                int elemento = ciclatore.getElementoSuccessivo();
+                System.out.println("Elemento successivo: " + elemento);
+                if (ciclatore.hasAncoraElementi()) {
+                    System.out.println("C'è un altro elemento");
+                    System.out.println("Premi Invio per continuare...");
+
+                    try {
+                        System.in.read();
+                        System.in.skip(1);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.out.println("Non ci sono più elementi");
+                }
+            } else {
+                break;
+            }
+        }
+    }
+}
